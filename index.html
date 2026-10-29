@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>美西公路旅行 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFCF6; --ink:#3E3A39; --muted:#615b59;
+  --coral:#F2A497; --yellow:#F6D27A; --sky:#A8D3E6; --green:#B9DAA5;
+  --line:3px solid var(--ink); --r:26px; --nav-h:60px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--nav-h) + 14px)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Huninn","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  line-height:1.7;font-size:16px;-webkit-text-size-adjust:100%}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+button{font:inherit;color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+section{padding:44px 0 8px}
+.card{background:var(--paper);border:var(--line);border-radius:var(--r);box-shadow:5px 5px 0 var(--ink)}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:50;background:var(--paper);border-bottom:var(--line)}
+.nav .wrap{height:100%;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;white-space:nowrap}
+.brand svg{width:34px;height:34px}
+.nav ul{list-style:none;margin:0 0 0 auto;padding:4px 2px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav li a{display:block;padding:4px 12px;border:var(--line);border-radius:999px;text-decoration:none;white-space:nowrap;font-size:14px;background:var(--paper);transition:transform .15s}
+.nav li:nth-child(5n+1) a{background:var(--coral)}
+.nav li:nth-child(5n+2) a{background:var(--yellow)}
+.nav li:nth-child(5n+3) a{background:var(--sky)}
+.nav li:nth-child(5n+4) a{background:var(--green)}
+.nav li a:hover,.nav li a:focus-visible{transform:translateY(-2px) rotate(-2deg)}
+:focus-visible{outline:3px dashed var(--ink);outline-offset:3px}
+main{padding-top:var(--nav-h)}
+@media (max-width:560px){.brand span{display:none}}
+
+/* hero */
+.hero{padding-top:28px;display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:860px){.hero{grid-template-columns:1fr 1.15fr;align-items:center}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{display:inline-block;border:var(--line);border-radius:999px;padding:1px 12px;font-size:14px;background:var(--yellow)}
+.chip.c2{background:var(--green)} .chip.c3{background:var(--sky)}
+.hero h1{font-size:clamp(34px,7vw,54px);line-height:1.2;font-weight:400}
+.hero h1 em{font-style:normal;background:var(--coral);border:var(--line);border-radius:16px;padding:0 10px;display:inline-block;transform:rotate(-2deg)}
+.route{margin:12px 0 18px;color:var(--muted)}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:430px}
+.cd div{border:var(--line);border-radius:20px;text-align:center;padding:8px 2px 6px}
+.cd div:nth-child(1){background:var(--coral)} .cd div:nth-child(2){background:var(--yellow)}
+.cd div:nth-child(3){background:var(--sky)} .cd div:nth-child(4){background:var(--green)}
+.cd b{display:block;font-size:clamp(24px,6vw,34px);line-height:1.2;font-weight:400;font-variant-numeric:tabular-nums}
+.cd small{font-size:13px}
+.cd-note{margin-top:10px;font-size:14px;color:var(--muted)}
+.scene{overflow:hidden;padding:0;line-height:0}
+.scene svg{width:100%;height:auto;display:block}
+
+/* svg animations */
+.svg-t{transform-box:fill-box;transform-origin:center}
+.cloud-a{animation:drift 14s ease-in-out infinite alternate}
+.cloud-b{animation:drift 18s ease-in-out infinite alternate-reverse}
+.rays{transform-origin:640px 95px;animation:spin 40s linear infinite}
+.sun{animation:breathe 5s ease-in-out infinite}
+.drive{animation:drive 16s linear infinite}
+.fly{animation:fly 34s linear infinite}
+.bob{animation:bob 3s ease-in-out infinite}
+.sway{animation:sway 4s ease-in-out infinite}
+.sway2{animation:sway 5s ease-in-out -2s infinite}
+.beam{animation:beam 3s ease-in-out infinite}
+.blink{animation:blink 1.6s steps(2,jump-none) infinite}
+.wheel{animation:spin 6s linear infinite}
+.twinkle{animation:blink 2.4s ease-in-out infinite}
+@keyframes drift{to{transform:translateX(46px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe{50%{transform:scale(1.06)}}
+@keyframes drive{from{transform:translateX(-150px)}to{transform:translateX(880px)}}
+@keyframes fly{from{transform:translateX(900px)}to{transform:translateX(-160px)}}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-2deg)}}
+@keyframes sway{50%{transform:rotate(4deg)}}
+@keyframes beam{50%{opacity:.25}}
+@keyframes blink{50%{opacity:.15}}
+
+/* headings */
+.sec-h{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-h .ico{width:52px;height:52px;flex:none}
+.sec-h h2{font-size:clamp(24px,5vw,32px);font-weight:400;line-height:1.2}
+.sec-h p{font-size:14px;color:var(--muted)}
+
+/* flights */
+.flights{display:grid;gap:18px}
+@media(min-width:860px){.flights{grid-template-columns:1fr 1fr}}
+.flight{overflow:hidden}
+.flight header{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-bottom:var(--line);gap:8px;flex-wrap:wrap}
+.flight.out header{background:var(--sky)} .flight.back header{background:var(--coral)}
+.flight header b{font-weight:400;font-size:18px}
+.seg{padding:14px 18px;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
+.seg + .seg{border-top:3px dashed var(--ink)}
+.seg .ap{font-size:28px;line-height:1.1}
+.seg .ap small{display:block;font-size:13px;color:var(--muted)}
+.seg .tm{font-size:15px}
+.seg .mid{text-align:center;font-size:12px;color:var(--muted);min-width:76px}
+.seg .mid svg{width:36px;height:20px;display:block;margin:0 auto 2px}
+.seg .r{text-align:right}
+.fnote{padding:10px 18px 14px;border-top:var(--line);font-size:14px;background:var(--paper)}
+.fnote span{display:inline-block;margin:2px 4px 2px 0;border:var(--line);border-radius:999px;padding:0 10px;font-size:13px;background:var(--yellow)}
+
+/* alert */
+.alert{margin-top:18px;padding:14px 18px;background:var(--yellow);display:flex;gap:12px;align-items:flex-start}
+.alert svg{width:30px;height:30px;flex:none;margin-top:2px}
+.alert ul{margin:4px 0 0;padding-left:18px;font-size:15px}
+
+/* days */
+.tabs{display:flex;gap:10px;overflow-x:auto;padding:6px 4px 14px;margin:0 -4px;scrollbar-width:thin}
+.tab{flex:none;min-width:78px;border:var(--line);border-radius:22px;background:var(--paper);padding:6px 10px 4px;text-align:center;cursor:pointer;line-height:1.25;transition:transform .15s}
+.tab small{display:block;font-size:12px}
+.tab b{display:block;font-size:20px;font-weight:400}
+.tab[data-city="lv"]{background:var(--yellow)}
+.tab[data-city="la"]{background:var(--coral)}
+.tab[data-city="sd"]{background:var(--sky)}
+.tab[data-city="fly"]{background:var(--green)}
+.tab:hover{transform:translateY(-3px)}
+.tab[aria-selected="true"]{box-shadow:4px 4px 0 var(--ink);transform:translateY(-4px)}
+.tab.bounce{animation:tabpop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes tabpop{0%{transform:scale(.85)}60%{transform:translateY(-9px) scale(1.08)}100%{transform:translateY(-4px) scale(1)}}
+.panel{padding:0;overflow:hidden}
+.panel.pop{animation:pop .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{0%{opacity:0;transform:translateY(18px) scale(.94)}100%{opacity:1;transform:none}}
+.ph{display:flex;gap:14px;align-items:center;padding:14px 18px;border-bottom:var(--line)}
+.ph svg{width:88px;height:66px;flex:none;border:var(--line);border-radius:18px;background:var(--paper)}
+.ph h3{font-size:clamp(20px,4.5vw,26px);font-weight:400;line-height:1.3}
+.ph p{font-size:14px;color:var(--muted)}
+.ph.lv{background:var(--yellow)} .ph.la{background:var(--coral)} .ph.sd{background:var(--sky)} .ph.fly{background:var(--green)}
+.tl{list-style:none;margin:0;padding:20px 16px 12px 30px;position:relative}
+.tl::before{content:"";position:absolute;left:41px;top:26px;bottom:26px;border-left:3px dashed var(--ink)}
+.tl li{position:relative;padding:0 0 18px 34px}
+.tl li::before{content:"";position:absolute;left:-1px;top:6px;width:20px;height:20px;border:var(--line);border-radius:50%;background:var(--green)}
+.tl li.must::before{background:var(--coral)}
+.tl .t{display:inline-block;font-size:14px;border:var(--line);border-radius:999px;padding:0 10px;background:var(--paper)}
+.tl .body{margin-top:6px;border:var(--line);border-radius:20px;padding:10px 14px;background:var(--paper)}
+.tl li.must .body{background:#fff;box-shadow:4px 4px 0 var(--coral)}
+.tl h4{margin:0;font-size:18px;font-weight:400;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tl p{font-size:15px;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:0 9px;font-size:12.5px;line-height:1.6;color:var(--ink)}
+.tag.fly{background:var(--sky)} .tag.car{background:var(--coral)} .tag.ride{background:var(--yellow)} .tag.walk{background:var(--green)}
+.must-b{display:inline-block;border:2px solid var(--ink);background:var(--coral);border-radius:10px;padding:0 8px;font-size:13px;transform:rotate(-3deg);animation:bob 2.6s ease-in-out infinite}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;font-size:14px;align-items:center}
+.pnote{margin:0 18px 18px;padding:10px 14px;border:var(--line);border-radius:18px;background:var(--yellow);font-size:14.5px}
+
+/* budget */
+.sumcards{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:18px}
+@media(min-width:700px){.sumcards{grid-template-columns:repeat(3,1fr)}}
+.sc{padding:14px 18px}
+.sc small{display:block;font-size:14px}
+.sc b{font-size:clamp(28px,6vw,36px);font-weight:400;line-height:1.2;font-variant-numeric:tabular-nums}
+.sc.a{background:var(--coral)} .sc.b{background:var(--sky)} .sc.c{background:var(--green)}
+.bar{display:flex;height:30px;border:var(--line);border-radius:999px;overflow:hidden;margin:6px 0 8px}
+.bar i{display:block;min-width:0;transition:width .5s cubic-bezier(.3,1.4,.5,1)}
+.bar i + i{border-left:var(--line)}
+.bl{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-bottom:16px}
+.bl span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--ink);border-radius:4px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.btools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.btools label{display:flex;align-items:center;gap:8px}
+input[type=number]{font:inherit;color:var(--ink);background:var(--paper);border:var(--line);border-radius:14px;padding:3px 8px;width:100%;min-width:0}
+.btools input{width:64px;text-align:center}
+.btn{border:var(--line);background:var(--paper);border-radius:999px;padding:3px 14px;cursor:pointer;font-size:14px;text-decoration:none;display:inline-block;transition:transform .15s}
+.btn:hover{transform:translateY(-2px) rotate(-1.5deg)}
+.btn.y{background:var(--yellow)}
+.rows{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:1fr 112px 86px;gap:8px 12px;align-items:center;padding:10px 14px;border:var(--line);border-radius:20px;background:var(--paper)}
+.row .nm{grid-column:1/2}
+.row .nm b{font-weight:400;font-size:16.5px}
+.row .nm small{display:block;font-size:13px;color:var(--muted);line-height:1.4}
+.row .pp{text-align:right;font-variant-numeric:tabular-nums;font-size:17px}
+.row .pp small{display:block;font-size:12px;color:var(--muted)}
+.st{display:inline-block;border:2px solid var(--ink);border-radius:8px;font-size:12px;padding:0 6px;margin-right:6px;vertical-align:1px}
+.st.paid{background:var(--green)} .st.booked{background:var(--sky)} .st.est{background:var(--yellow)}
+@media(max-width:520px){.row{grid-template-columns:1fr 100px}.row .pp{grid-column:1/3;text-align:left;display:flex;justify-content:space-between;border-top:3px dashed var(--ink);padding-top:6px}.row .pp small{display:inline}}
+.fine{margin-top:12px;font-size:13.5px;color:var(--muted)}
+
+/* checklist */
+.prog{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.prog .bar{flex:1;margin:0;height:22px}
+.prog .bar i{background:var(--green)}
+.cl{display:grid;gap:16px}
+@media(min-width:760px){.cl{grid-template-columns:1fr 1fr}}
+.cl .card{padding:14px 18px}
+.cl h3{font-size:19px;font-weight:400;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.cl h3::before{content:"";width:16px;height:16px;border:var(--line);border-radius:50%;background:var(--c)}
+.cl ul{list-style:none;margin:0;padding:0}
+.cl label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer;font-size:15.5px;line-height:1.5}
+.cl input{position:absolute;opacity:0;width:0;height:0}
+.cl .bx{flex:none;width:24px;height:24px;border:var(--line);border-radius:8px;background:var(--paper);margin-top:1px;display:grid;place-items:center;transition:transform .2s}
+.cl .bx svg{width:16px;height:16px;opacity:0;transform:scale(.3);transition:.25s cubic-bezier(.3,1.8,.5,1)}
+.cl input:checked + .bx{background:var(--green);transform:rotate(-6deg)}
+.cl input:checked + .bx svg{opacity:1;transform:scale(1)}
+.cl input:checked ~ .tx{text-decoration:line-through;color:var(--muted)}
+.cl input:focus-visible + .bx{outline:3px dashed var(--ink);outline-offset:3px}
+
+/* stay */
+.stays{display:grid;gap:18px}
+@media(min-width:860px){.stays{grid-template-columns:repeat(3,1fr)}}
+.stay{overflow:hidden;display:flex;flex-direction:column}
+.stay .top{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:var(--line)}
+.stay .top svg{width:70px;height:52px;flex:none;border:var(--line);border-radius:16px;background:var(--paper)}
+.stay.lv .top{background:var(--yellow)} .stay.la .top{background:var(--coral)} .stay.sd .top{background:var(--sky)}
+.stay h3{font-weight:400;font-size:20px;line-height:1.3}
+.stay .in{padding:12px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.kv{display:flex;justify-content:space-between;gap:10px;font-size:15px;border-bottom:3px dashed var(--ink);padding-bottom:4px}
+.kv span:first-child{color:var(--muted)}
+.stay textarea{font:inherit;font-size:14.5px;color:var(--ink);background:var(--paper);border:var(--line);border-radius:16px;padding:8px 12px;width:100%;min-height:76px;resize:vertical}
+.stay .btn{margin-top:auto;text-align:center}
+footer{padding:36px 16px 48px;text-align:center;font-size:14px;color:var(--muted)}
+footer svg{width:96px;height:48px;display:block;margin:0 auto 8px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<!-- 共用圖示 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ic-plane" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse cx="22" cy="24" rx="19" ry="7" fill="#FFFCF6"/><path d="M36 20 L44 10 L47 10 L43 24Z" fill="#F2A497"/><path d="M18 28 L28 42 L33 42 L28 26Z" fill="#F6D27A"/><circle cx="12" cy="23" r="1.5" fill="#3E3A39"/><circle cx="18" cy="23" r="1.5" fill="#3E3A39"/>
+    </symbol>
+    <symbol id="ic-car" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="3" y="22" width="42" height="14" rx="6" fill="#F2A497"/><path d="M10 22 L15 11 H33 L39 22Z" fill="#F2A497"/><path d="M17 21 L19 14 H23 V21Z M26 14 H31 L35 21 H26Z" fill="#A8D3E6" stroke-width="2"/><circle cx="14" cy="37" r="5" fill="#FFFCF6"/><circle cx="34" cy="37" r="5" fill="#FFFCF6"/>
+    </symbol>
+    <symbol id="ic-house" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M7 22 L24 7 L41 22Z" fill="#F2A497"/><rect x="11" y="22" width="26" height="19" fill="#FFFCF6"/><rect x="20" y="29" width="8" height="12" fill="#F6D27A"/>
+    </symbol>
+    <symbol id="ic-check" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="8" y="6" width="32" height="38" rx="6" fill="#FFFCF6"/><rect x="17" y="3" width="14" height="8" rx="3" fill="#F6D27A"/><path d="M15 20 l3 3 l6 -6 M15 32 l3 3 l6 -6" stroke="#3E3A39"/><path d="M28 21 h7 M28 33 h7"/>
+    </symbol>
+    <symbol id="ic-wallet" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="5" y="12" width="38" height="28" rx="8" fill="#F6D27A"/><path d="M5 20 H43"/><circle cx="34" cy="30" r="3.5" fill="#FFFCF6"/><path d="M12 12 L30 5 L34 12" fill="#B9DAA5"/>
+    </symbol>
+    <symbol id="ic-alert" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M24 5 L45 41 H3Z" fill="#FFFCF6"/><path d="M24 17 V28"/><circle cx="24" cy="35" r="1.8" fill="#3E3A39"/>
+    </symbol>
+    <symbol id="ic-cal" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="5" y="9" width="38" height="34" rx="8" fill="#FFFCF6"/><path d="M5 20 H43" /><rect x="5" y="9" width="38" height="11" rx="6" fill="#B9DAA5"/><path d="M15 5 V12 M33 5 V12"/><circle cx="16" cy="29" r="2.4" fill="#F2A497"/><circle cx="24" cy="29" r="2.4" fill="#F6D27A"/><circle cx="32" cy="29" r="2.4" fill="#A8D3E6"/><circle cx="16" cy="37" r="2.4" fill="#A8D3E6"/><circle cx="24" cy="37" r="2.4" fill="#F2A497"/>
+    </symbol>
+    <symbol id="ic-sun" viewBox="0 0 48 48" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <circle cx="24" cy="24" r="9" fill="#F6D27A"/><path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.5 10.5l4 4M33.5 33.5l4 4M37.5 10.5l-4 4M14.5 33.5l-4 4"/>
+    </symbol>
+
+    <!-- 城市小插圖 120x90 -->
+    <symbol id="city-lv" viewBox="0 0 120 90" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="6" y="46" width="30" height="40" fill="#F2A497"/><path d="M13 56h4M25 56h4M13 66h4M25 66h4M13 76h4M25 76h4" stroke-width="3"/>
+      <rect x="55" y="34" width="8" height="52" fill="#FFFCF6"/><ellipse cx="59" cy="32" rx="15" ry="6" fill="#F6D27A"/><path d="M59 26V10"/>
+      <path d="M72 86 L92 50 L112 86Z" fill="#FFFCF6"/><path d="M82 70h20M87 60h10"/>
+      <rect x="86" y="14" width="20" height="20" rx="5" fill="#FFFCF6" transform="rotate(12 96 24)"/><circle cx="92" cy="20" r="1.8" fill="#3E3A39"/><circle cx="101" cy="28" r="1.8" fill="#3E3A39"/><circle cx="96.5" cy="24" r="1.8" fill="#3E3A39"/>
+    </symbol>
+    <symbol id="city-la" viewBox="0 0 120 90" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M12 62 A30 30 0 0 1 72 62Z" fill="#F6D27A"/><path d="M42 22v-8M17 33l-5-5M67 33l5-5"/>
+      <path d="M4 62 Q30 52 60 62 T116 60 V86 H4Z" fill="#B9DAA5"/>
+      <path d="M92 84 Q96 60 88 38" stroke-width="5"/>
+      <g fill="#B9DAA5"><ellipse cx="76" cy="38" rx="14" ry="5" transform="rotate(-25 76 38)"/><ellipse cx="100" cy="36" rx="14" ry="5" transform="rotate(25 100 36)"/><ellipse cx="88" cy="30" rx="5" ry="12"/></g>
+    </symbol>
+    <symbol id="city-sd" viewBox="0 0 120 90" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M44 84 L48 30 H66 L70 84Z" fill="#FFFCF6"/><path d="M46.5 56H67.5L68.8 68H45.2Z" fill="#F2A497"/><rect x="48" y="16" width="18" height="14" fill="#F6D27A"/><path d="M44 16 L57 4 L70 16Z" fill="#F2A497"/>
+      <path d="M2 74 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t18 0 V88 H2Z" fill="#A8D3E6"/>
+      <path d="M90 62 V36 L106 58Z" fill="#FFFCF6"/><path d="M86 62H110L105 70H91Z" fill="#F2A497"/>
+    </symbol>
+    <symbol id="city-fly" viewBox="0 0 120 90" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M8 70 Q60 40 112 70" stroke-dasharray="3 7"/><g transform="translate(26 8) scale(1.1)"><ellipse cx="30" cy="30" rx="26" ry="9" fill="#FFFCF6"/><path d="M52 26 L60 14 L64 14 L58 30Z" fill="#F2A497"/><path d="M26 34 L38 52 L44 52 L38 32Z" fill="#F6D27A"/></g>
+      <path d="M12 82 H108" />
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="回到首頁">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-sun"/></svg><span>美西 7 日</span>
+    </a>
+    <nav aria-label="主選單">
+      <ul>
+        <li><a href="#top">首頁</a></li>
+        <li><a href="#flights">航班</a></li>
+        <li><a href="#days">行程</a></li>
+        <li><a href="#budget">預算</a></li>
+        <li><a href="#todo">待辦</a></li>
+        <li><a href="#stay">住宿</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+
+<!-- 首頁 -->
+<div class="hero">
+  <div>
+    <div class="chips"><span class="chip">2026 / 11 / 24 – 12 / 1</span><span class="chip c2">4 位大人</span><span class="chip c3">自駕 + 紅眼回程</span></div>
+    <h1>美西<em>公路</em>旅行</h1>
+    <p class="route">拉斯維加斯 ✦ 洛杉磯 ✦ 聖地牙哥<br>夜生活、好好吃一頓、追三次夕陽</p>
+    <div class="cd" id="cd" role="timer" aria-live="off">
+      <div><b id="cd-d">--</b><small>天</small></div>
+      <div><b id="cd-h">--</b><small>時</small></div>
+      <div><b id="cd-m">--</b><small>分</small></div>
+      <div><b id="cd-s">--</b><small>秒</small></div>
+    </div>
+    <p class="cd-note" id="cd-note">倒數至 11/24 10:24 AM 匹茲堡起飛</p>
+  </div>
+
+  <div class="card scene">
+    <svg viewBox="0 0 800 380" role="img" aria-label="插圖：拉斯維加斯高塔與金字塔、好萊塢山丘、棕櫚樹與燈塔，一輛休旅車在公路上行駛，飛機飛過天空">
+      <defs>
+        <path id="cloud" d="M70 90 a20 20 0 0 1 4 -40 a28 28 0 0 1 52 -8 a24 24 0 0 1 40 14 a18 18 0 0 1 2 34Z"/>
+      </defs>
+      <rect width="800" height="380" fill="#A8D3E6"/>
+      <!-- 太陽 -->
+      <g class="sun svt" style="transform-origin:640px 95px">
+        <g class="rays" stroke="#3E3A39" stroke-width="4" stroke-linecap="round">
+          <line x1="640" y1="30" x2="640" y2="18"/><line x1="640" y1="30" x2="640" y2="18" transform="rotate(45 640 95)"/>
+          <line x1="640" y1="30" x2="640" y2="18" transform="rotate(90 640 95)"/><line x1="640" y1="30" x2="640" y2="18" transform="rotate(135 640 95)"/>
+          <line x1="640" y1="30" x2="640" y2="18" transform="rotate(180 640 95)"/><line x1="640" y1="30" x2="640" y2="18" transform="rotate(225 640 95)"/>
+          <line x1="640" y1="30" x2="640" y2="18" transform="rotate(270 640 95)"/><line x1="640" y1="30" x2="640" y2="18" transform="rotate(315 640 95)"/>
+        </g>
+        <circle cx="640" cy="95" r="40" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+      </g>
+      <!-- 雲 -->
+      <g class="cloud-a"><use href="#cloud" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" transform="translate(40 10)"/></g>
+      <g class="cloud-b"><use href="#cloud" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" transform="translate(330 50) scale(.75)"/></g>
+      <!-- 飛機 -->
+      <g transform="translate(0 150)"><g class="fly"><g class="bob">
+        <g fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round">
+          <ellipse cx="40" cy="14" rx="34" ry="10"/>
+          <path d="M68 10 L84 -6 L90 -6 L82 14Z" fill="#F2A497"/>
+          <path d="M30 16 L48 34 L56 34 L48 14Z" fill="#F6D27A"/>
+        </g>
+        <circle cx="22" cy="12" r="2" fill="#3E3A39"/><circle cx="32" cy="12" r="2" fill="#3E3A39"/><circle cx="42" cy="12" r="2" fill="#3E3A39"/>
+      </g></g></g>
+
+      <!-- 遠山與好萊塢山丘 -->
+      <g stroke="#3E3A39" stroke-width="3" stroke-linejoin="round">
+        <path d="M0 300 Q120 250 260 288 T520 272 T800 292 V320 H0Z" fill="#B9DAA5"/>
+        <path d="M250 304 Q385 190 530 304Z" fill="#B9DAA5"/>
+      </g>
+      <text x="390" y="262" font-size="17" letter-spacing="3" text-anchor="middle" fill="#3E3A39" style="font-family:Huninn,sans-serif">HOLLYWOOD</text>
+
+      <!-- 拉斯維加斯 -->
+      <g stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="18" y="215" width="62" height="105" fill="#F2A497"/>
+        <g fill="#F6D27A" stroke="none"><rect x="28" y="228" width="10" height="10"/><rect x="48" y="228" width="10" height="10"/><rect x="28" y="252" width="10" height="10"/><rect x="48" y="252" width="10" height="10"/><rect x="28" y="276" width="10" height="10"/><rect x="48" y="276" width="10" height="10"/></g>
+        <path d="M200 215 L182 62 H218Z" fill="#F6D27A" stroke="none" class="beam"/>
+        <path d="M150 320 L200 215 L250 320Z" fill="#FFFCF6"/>
+        <path d="M168 285 H232 M180 258 H220 M190 236 H210" />
+        <rect x="112" y="172" width="14" height="148" fill="#FFFCF6"/>
+        <ellipse cx="119" cy="166" rx="27" ry="10" fill="#F6D27A"/>
+        <path d="M119 156 V118"/>
+        <circle class="blink" cx="119" cy="114" r="5" fill="#F2A497"/>
+      </g>
+
+      <!-- 棕櫚 -->
+      <g stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M560 320 Q574 270 556 222" stroke-width="7" fill="none"/>
+        <g class="sway svt" fill="#B9DAA5"><ellipse cx="556" cy="222" rx="32" ry="9" transform="rotate(-28 556 222)"/><ellipse cx="556" cy="222" rx="32" ry="9" transform="rotate(28 556 222)"/><ellipse cx="556" cy="214" rx="9" ry="26"/></g>
+        <path d="M612 320 Q624 282 612 250" stroke-width="7" fill="none"/>
+        <g class="sway2 svt" fill="#B9DAA5"><ellipse cx="612" cy="250" rx="26" ry="8" transform="rotate(-28 612 250)"/><ellipse cx="612" cy="250" rx="26" ry="8" transform="rotate(28 612 250)"/><ellipse cx="612" cy="243" rx="8" ry="21"/></g>
+      </g>
+
+      <!-- 聖地牙哥燈塔 -->
+      <g stroke="#3E3A39" stroke-width="3" stroke-linejoin="round">
+        <path d="M680 320 Q740 270 800 320Z" fill="#F6D27A"/>
+        <path d="M715 306 L725 200 H755 L765 306Z" fill="#FFFCF6"/>
+        <path d="M723.6 214 H756.4 L758.2 232 H721.8Z M719.5 255 H760.5 L763 280 H717Z" fill="#F2A497"/>
+        <rect x="727" y="182" width="26" height="18" fill="#F6D27A"/>
+        <path d="M722 182 L740 164 L758 182Z" fill="#F2A497"/>
+        <circle class="blink" cx="740" cy="191" r="3" fill="#3E3A39" stroke="none"/>
+      </g>
+
+      <!-- 公路 -->
+      <rect x="0" y="318" width="800" height="62" fill="#3E3A39"/>
+      <line x1="0" y1="372" x2="800" y2="372" stroke="#FFFCF6" stroke-width="4" stroke-dasharray="26 22"/>
+      <g transform="translate(0 308)"><g class="drive">
+        <g stroke="#3E3A39" stroke-width="3" stroke-linejoin="round">
+          <rect x="0" y="22" width="98" height="26" rx="9" fill="#F2A497"/>
+          <path d="M14 22 L28 3 H68 L84 22Z" fill="#F2A497"/>
+          <path d="M31 20 L38 8 H48 V20Z M53 8 H65 L75 20 H53Z" fill="#A8D3E6" stroke-width="2.5"/>
+          <rect x="88" y="30" width="9" height="7" rx="2" fill="#F6D27A" stroke-width="2"/>
+        </g>
+        <g class="wheel" style="transform-origin:24px 50px"><circle cx="24" cy="50" r="10" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/><path d="M24 44v12M18 50h12" stroke="#3E3A39" stroke-width="2.5"/></g>
+        <g class="wheel" style="transform-origin:76px 50px"><circle cx="76" cy="50" r="10" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/><path d="M76 44v12M70 50h12" stroke="#3E3A39" stroke-width="2.5"/></g>
+      </g></g>
+    </svg>
+  </div>
+</div>
+
+<!-- 航班 -->
+<section id="flights">
+  <div class="sec-h"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-plane"/></svg>
+    <div><h2>航班資訊</h2><p>時間皆為當地時間（匹茲堡 ET／拉斯維加斯、洛杉磯 PT，相差 3 小時）</p></div></div>
+  <div class="flights">
+    <article class="card flight out">
+      <header><b>去程 · 11/24（二）</b><span class="chip">Delta Main Basic</span></header>
+      <div class="seg">
+        <div><div class="ap">PIT<small>匹茲堡</small></div><div class="tm">10:24 AM</div></div>
+        <div class="mid"><svg viewBox="0 0 48 48"><use href="#ic-plane"/></svg>DL 3684<br>SkyWest 營運</div>
+        <div class="r"><div class="ap">DTW<small>底特律</small></div><div class="tm">11:35 AM</div></div>
+      </div>
+      <div class="seg">
+        <div><div class="ap">DTW<small>底特律 · 轉機 1 小時</small></div><div class="tm">12:35 PM</div></div>
+        <div class="mid"><svg viewBox="0 0 48 48"><use href="#ic-plane"/></svg>DL 421</div>
+        <div class="r"><div class="ap">LAS<small>拉斯維加斯</small></div><div class="tm">1:59 PM</div></div>
+      </div>
+      <div class="fnote"><span>座位：登機口才分配</span><span>手提行李免費</span><span>託運第 1 件 $45</span><span>票價 $143.20</span></div>
+    </article>
+    <article class="card flight back">
+      <header><b>回程 · 11/30（一）夜 → 12/1</b><span class="chip c2">Southwest Basic</span></header>
+      <div class="seg">
+        <div><div class="ap">LAX<small>洛杉磯</small></div><div class="tm">11/30 11:55 PM</div></div>
+        <div class="mid"><svg viewBox="0 0 48 48"><use href="#ic-plane"/></svg>WN 2518<br>紅眼</div>
+        <div class="r"><div class="ap">MDW<small>芝加哥中途 · 轉機</small></div><div class="tm">12/1 5:55 AM</div></div>
+      </div>
+      <div class="seg">
+        <div><div class="ap">MDW<small>芝加哥中途</small></div><div class="tm">8:15 AM</div></div>
+        <div class="mid"><svg viewBox="0 0 48 48"><use href="#ic-plane"/></svg>WN 3643</div>
+        <div class="r"><div class="ap">PIT<small>匹茲堡</small></div><div class="tm">10:40 AM</div></div>
+      </div>
+      <div class="fnote"><span>座位：報到時分配</span><span>總飛行 7h45m</span><span>票價 $233.20</span></div>
+    </article>
+  </div>
+
+  <div class="card alert">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-alert"/></svg>
+    <div><b>幾件要先處理的事</b>
+      <ul>
+        <li><b>租車 11/30 晚上 8:00 在 LAX 還車：</b>飛機 11:55 PM 起飛，還車後搭接駁、報到、安檢時間夠。還車前記得先加滿油。</li>
+        <li><b>11/26 是感恩節：</b>很多餐廳休息或只賣特餐，好吃的那一餐請盡早訂位。</li>
+        <li><b>Delta Main Basic 不能選位：</b>想坐一起的話，24 小時前報到後盡快到 App 看有沒有位子。</li>
+        <li><b>11/30 到 12/1 的紅眼班機：</b>白天退房後行李放車上，晚上還車後再拖進機場。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 每日行程 -->
+<section id="days">
+  <div class="sec-h"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-cal"/></svg>
+    <div><h2>每日行程</h2><p>點日期切換；紅色圓點 = 必去</p></div></div>
+  <div class="legend" aria-label="圖例">
+    <span class="tag fly">飛機</span><span class="tag car">自駕</span><span class="tag ride">叫車</span><span class="tag walk">步行</span><span class="must-b">必去</span>
+  </div>
+  <div class="tabs" role="tablist" aria-label="選擇日期" id="tabs"></div>
+  <article class="card panel" id="panel" role="tabpanel" aria-live="polite"></article>
+</section>
+
+<!-- 預算 -->
+<section id="budget">
+  <div class="sec-h"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-wallet"/></svg>
+    <div><h2>價格估算</h2><p>金額可以直接改，會存在這台裝置的瀏覽器裡</p></div></div>
+  <div class="sumcards">
+    <div class="card sc a"><small>我一個人的總花費（估）</small><b id="s-me">$0</b></div>
+    <div class="card sc b"><small>已確定（機票＋租車分攤）</small><b id="s-fix">$0</b></div>
+    <div class="card sc c"><small>全部團費（<span id="s-n">4</span> 人合計）</small><b id="s-all">$0</b></div>
+  </div>
+  <div class="bar" id="bar" aria-hidden="true"></div>
+  <div class="bl" id="bl"></div>
+  <div class="btools">
+    <label>分攤人數 <input type="number" id="people" min="1" max="12" value="4" inputmode="numeric" aria-label="分攤人數"></label>
+    <button class="btn y" id="reset" type="button">還原預設</button>
+  </div>
+  <div class="rows" id="rows"></div>
+  <p class="fine">機票、租車、住宿是實際的訂單金額；油錢、叫車、餐飲、活動是我抓的預估，請依實際訂單改。油錢以約 650 英里、每加侖 28 英里、$4.6/加侖估算。</p>
+</section>
+
+<!-- 待辦 -->
+<section id="todo">
+  <div class="sec-h"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-check"/></svg>
+    <div><h2>待辦清單</h2><p>打勾會自動記住</p></div></div>
+  <div class="prog"><span id="prog-t">0 / 0</span><div class="bar" aria-hidden="true"><i id="prog-b" style="width:0"></i></div></div>
+  <div class="cl" id="cl"></div>
+</section>
+
+<!-- 住宿 -->
+<section id="stay">
+  <div class="sec-h"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-house"/></svg>
+    <div><h2>住宿資訊</h2><p>三間 Airbnb；11/30 晚上直接去機場，不用訂房</p></div></div>
+  <div class="stays">
+    <article class="card stay lv">
+      <div class="top"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#city-lv"/></svg><div><h3>拉斯維加斯</h3><small>3 晚</small></div></div>
+      <div class="in">
+        <div class="kv"><span>入住</span><span>11/24（二）</span></div>
+        <div class="kv"><span>退房</span><span>11/27（五）</span></div>
+        <div class="kv"><span>預估房費</span><span id="st-lv">—</span></div>
+        <textarea data-note="lv" placeholder="地址、入住時間、門鎖密碼⋯" aria-label="拉斯維加斯住宿備忘"></textarea>
+      </div>
+    </article>
+    <article class="card stay la">
+      <div class="top"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#city-la"/></svg><div><h3>洛杉磯</h3><small>1 晚</small></div></div>
+      <div class="in">
+        <div class="kv"><span>入住</span><span>11/27（五）</span></div>
+        <div class="kv"><span>退房</span><span>11/28（六）</span></div>
+        <div class="kv"><span>預估房費</span><span id="st-la">—</span></div>
+        <textarea data-note="la" placeholder="地址、入住時間、停車位⋯" aria-label="洛杉磯住宿備忘"></textarea>
+      </div>
+    </article>
+    <article class="card stay sd">
+      <div class="top"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#city-sd"/></svg><div><h3>聖地牙哥</h3><small>2 晚</small></div></div>
+      <div class="in">
+        <div class="kv"><span>入住</span><span>11/28（六）</span></div>
+        <div class="kv"><span>退房</span><span>11/30（一）</span></div>
+        <div class="kv"><span>預估房費</span><span id="st-sd">—</span></div>
+        <textarea data-note="sd" placeholder="地址、入住時間、停車位⋯" aria-label="聖地牙哥住宿備忘"></textarea>
+      </div>
+    </article>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <svg viewBox="0 0 120 60" aria-hidden="true" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="60" cy="52" r="30" fill="#F6D27A"/><path d="M0 54H120" /></svg>
+  玩得開心，一路平安 ✦ 美西公路旅行 2026
+</footer>
+
+<script>
+/* ---------- 資料 ---------- */
+const TRIP_START = new Date('2026-11-24T10:24:00-05:00');
+const CITY_ICON = {lv:'city-lv', la:'city-la', sd:'city-sd', fly:'city-fly'};
+const TAG = {fly:'飛機', car:'自駕', ride:'叫車', walk:'步行'};
+
+const DAYS = [
+ {d:'11/24', w:'二', city:'lv', title:'抵達拉斯維加斯', sub:'下午到、晚上先暖身', items:[
+  {t:'10:24', h:'匹茲堡出發', p:'DL 3684 → 底特律 11:35 抵達。', tags:['fly']},
+  {t:'12:35', h:'底特律轉機', p:'DL 421 → 拉斯維加斯，1:59 PM（PT）降落。時差 −3 小時。', tags:['fly']},
+  {t:'14:45', h:'機場叫車到 Airbnb', p:'車程約 15–25 分鐘，預估 $25–35。這天還沒取車。', tags:['ride']},
+  {t:'16:00', h:'入住、洗澡、放行李', p:'先確認入住時間與停車/門鎖說明。', tags:[]},
+  {t:'18:30', h:'Bellagio 噴泉＋Strip 散步', p:'傍晚起每 15–30 分鐘一場，免費。順路逛 Bellagio 花園與 Venetian。', tags:['walk','ride'], must:true},
+  {t:'20:30', h:'晚餐、早點睡', p:'明天是夜生活，今天先倒時差。', tags:[]}
+ ]},
+ {d:'11/25', w:'三', city:'lv', title:'拉斯維加斯・夜生活', sub:'白天養精神，晚上才是主場', items:[
+  {t:'11:00', h:'睡飽＋早午餐', p:'Strip 上的飯店餐廳或 Airbnb 附近都行。', tags:[]},
+  {t:'14:00', h:'Strip 室內逛街', p:'Venetian 貢多拉、Forum Shops、各飯店賭場大廳。沿路走，累了叫車。', tags:['walk','ride']},
+  {t:'19:00', h:'晚餐', p:'吃飽再出門，酒吧夜店通常 10 點後才熱。', tags:[]},
+  {t:'21:30', h:'Fremont Street 光影秀', p:'老城區的巨型 LED 拱頂，免費、整點有秀。從 Airbnb 叫車約 $20。', tags:['ride','walk'], must:true},
+  {t:'23:00', h:'夜店／酒吧', p:'選一間先查服裝規定和 guest list。帶護照或 ID，結伴叫車回家。', tags:['ride'], must:true}
+ ]},
+ {d:'11/26', w:'四', city:'lv', title:'拉斯維加斯・吃好吃的', sub:'感恩節，先訂位', items:[
+  {t:'11:00', h:'確認哪些餐廳有開', p:'感恩節很多店休息或只賣固定套餐，營業時間和訂位一定要先查。', tags:[]},
+  {t:'12:00', h:'豪華自助餐或 brunch', p:'例如 Caesars Palace 的 Bacchanal 這類大型自助餐，須確認當天是否營業與價格。', tags:['ride']},
+  {t:'15:00', h:'飯後散步', p:'Strip 上走走消化，逛 Sphere 外牆（晚上有 LED 動畫）。', tags:['walk']},
+  {t:'18:30', h:'主餐：牛排／日料／米其林擇一', p:'這天的重點。訂位時備註感恩節，預留 2 小時。', tags:['ride'], must:true},
+  {t:'21:30', h:'收行李、早睡', p:'明早 9:30 退房取車，開長途。', tags:[]}
+ ]},
+ {d:'11/27', w:'五', city:'la', title:'拉斯維加斯 → 洛杉磯', sub:'取車，傍晚前抵達看夕陽', items:[
+  {t:'09:30', h:'退房，叫車到機場取車', p:'租車地點：Harry Reid 機場（LAS）。', tags:['ride']},
+  {t:'10:00', h:'取 Nissan Rogue（中型 SUV）', p:'到店付款 $328.84。帶駕照＋信用卡，檢查車況拍照。', tags:['car']},
+  {t:'10:45', h:'I-15 往南加州', p:'約 270 英里、4–5 小時。感恩節連假車流大，預留緩衝。出發前加滿油。', tags:['car']},
+  {t:'12:45', h:'途中休息：Baker／Barstow', p:'Baker 有世界最高的溫度計，順便吃午餐、加油。', tags:['car']},
+  {t:'16:00', h:'聖塔莫尼卡碼頭看夕陽', p:'日落約 4:45 PM，最晚 3:45 前到先停好車。摩天輪、海岸線一起拍。', tags:['car','walk'], must:true},
+  {t:'18:30', h:'入住 LA Airbnb、晚餐', p:'Venice 或 Santa Monica 附近吃，之後回房休息。', tags:['car']}
+ ]},
+ {d:'11/28', w:'六', city:'sd', title:'洛杉磯 → 聖地牙哥', sub:'開兩小時到 SD', items:[
+  {t:'09:00', h:'早餐、退房', p:'行李放車上，記得鎖好、不要把貴重物品留在車內。', tags:['car']},
+  {t:'10:30', h:'I-5 南下', p:'約 120 英里、2–2.5 小時。可選途中停 Laguna Beach 或 San Clemente 看海。', tags:['car']},
+  {t:'13:30', h:'La Jolla Cove 海獅與海景', p:'懸崖邊看海獅、海豹。附近午餐，停車位難找，預留時間。', tags:['car','walk'], must:true},
+  {t:'16:00', h:'入住 SD Airbnb', p:'放行李，小憩。', tags:['car']},
+  {t:'18:30', h:'Gaslamp Quarter 晚餐', p:'市中心老城區，餐廳酒吧多。停車費較貴，可叫車。', tags:['ride','walk']}
+ ]},
+ {d:'11/29', w:'日', city:'sd', title:'聖地牙哥・看夕陽', sub:'整天都在海邊', items:[
+  {t:'09:30', h:'Coronado 島與 Hotel del Coronado', p:'過橋或搭渡輪都行。紅頂老飯店、寬闊沙灘。', tags:['car','walk'], must:true},
+  {t:'12:30', h:'Old Town 午餐', p:'墨西哥菜、玉米餅，老城區有街頭表演。', tags:['car','walk']},
+  {t:'14:30', h:'Balboa Park 或 Torrey Pines 步道', p:'二選一：公園博物館與西班牙式建築，或懸崖步道看海。', tags:['car','walk']},
+  {t:'16:00', h:'Sunset Cliffs 看夕陽', p:'日落約 4:45 PM。提早 30–45 分鐘卡位，風大帶外套。', tags:['car','walk'], must:true},
+  {t:'18:30', h:'Little Italy 晚餐', p:'餐廳街區，晚上很熱鬧。最後一晚吃好一點。', tags:['car','walk']}
+ ]},
+ {d:'11/30', w:'一', city:'fly', title:'聖地牙哥 → 洛杉磯 → 飛機', sub:'白天玩 LA，晚上還車去機場', items:[
+  {t:'10:00', h:'退房、行李上車', p:'檢查有沒有遺落物品。', tags:['car']},
+  {t:'10:30', h:'I-5 北上洛杉磯', p:'約 120 英里、2–2.5 小時。', tags:['car']},
+  {t:'13:00', h:'午餐＋葛理菲斯天文台', p:'可俯瞰洛杉磯與好萊塢標誌。週一部分館休息，但戶外平台開放。', tags:['car','walk'], must:true},
+  {t:'16:30', h:'Venice Beach 或 The Grove 逛街', p:'二選一：海邊塗鴉、滑板公園，或室內購物。', tags:['car','walk']},
+  {t:'18:30', h:'LA 最後一餐', p:'吃好再走，別拖太晚。', tags:['car']},
+  {t:'19:15', h:'加滿油、開到 LAX 還車', p:'租車 8:00 PM 還車，LAX 附近車多，預留 30–45 分鐘。', tags:['car'], must:true},
+  {t:'20:30', h:'報到、托運、過安檢', p:'WN 2518 於 11:55 PM 起飛，12/1 清晨 5:55 抵達芝加哥中途，8:15 轉機，10:40 AM 回匹茲堡。', tags:['fly']}
+ ]}
+];
+
+const BUDGET = [
+ {id:'f1', cat:'trans', name:'去程機票 Delta', note:'PIT → DTW → LAS', amt:143.20, shared:false, st:'paid'},
+ {id:'f2', cat:'trans', name:'回程機票 Southwest', note:'LAX → MDW → PIT', amt:233.20, shared:false, st:'paid'},
+ {id:'car', cat:'trans', name:'租車 Nissan Rogue', note:'11/27–11/30，到店付款，含稅費', amt:328.84, shared:true, st:'booked'},
+ {id:'gas', cat:'trans', name:'油錢', note:'約 650 英里（LV→LA→SD→LA）', amt:110, shared:true, st:'est'},
+ {id:'ride',cat:'trans', name:'Uber／Lyft', note:'機場往返、拉斯維加斯夜生活', amt:150, shared:true, st:'est'},
+ {id:'park',cat:'trans', name:'停車費、飯店 resort fee', note:'LA / SD 景點與市區停車', amt:60, shared:true, st:'est'},
+ {id:'h-lv',cat:'stay',  name:'Airbnb 拉斯維加斯 3 晚', note:'11/24–11/27，總價', amt:330, shared:true, st:'booked'},
+ {id:'h-la',cat:'stay',  name:'Airbnb 洛杉磯 1 晚', note:'11/27–11/28，總價', amt:130, shared:true, st:'booked'},
+ {id:'h-sd',cat:'stay',  name:'Airbnb 聖地牙哥 2 晚', note:'11/28–11/30，總價', amt:350, shared:true, st:'booked'},
+ {id:'food',cat:'food',  name:'餐飲（7 天）', note:'含 11/26 好好吃一頓，約每人 $400', amt:1600, shared:true, st:'est'},
+ {id:'fun', cat:'fun',   name:'夜生活、門票、雜支', note:'夜店、景點、紀念品，約每人 $150', amt:600, shared:true, st:'est'}
+];
+const CATS = {trans:['交通','var(--sky)'], stay:['住宿','var(--yellow)'], food:['餐飲','var(--coral)'], fun:['玩樂','var(--green)']};
+const ST = {paid:'已付', booked:'已訂', est:'預估'};
+
+const TODO = [
+ {g:'出發前', c:'var(--coral)', items:[
+  '24 小時前完成 Delta 報到（盡快看有沒有座位）',
+  '24 小時前完成 Southwest 報到（紅眼班機）',
+  '確認租車訂單的還車時間已改成 11/30 8:00 PM',
+  '訂 11/26 感恩節那一餐的餐廳',
+  '查夜店／酒吧的服裝規定與 guest list',
+  '確認三間 Airbnb 的入住時間、地址與停車說明'
+ ]},
+ {g:'證件與支付', c:'var(--yellow)', items:[
+  '護照或 REAL ID（國內線過安檢要用）',
+  '駕照（取車需要，名字要跟訂單一致）',
+  '租車用信用卡（到店付款）',
+  '裝好 Uber／Lyft、Google Maps 離線地圖'
+ ]},
+ {g:'行李', c:'var(--sky)', items:[
+  '外套與長褲（沙漠夜晚、海邊傍晚會冷）',
+  '太陽眼鏡、防曬',
+  '手機車用支架、充電線、行動電源',
+  '夜生活的衣服與鞋',
+  '決定是否托運：Delta 第 1 件 $45'
+ ]},
+ {g:'沿途', c:'var(--green)', items:[
+  '11/27 出發前加滿油（沙漠段加油站少）',
+  '取車時繞車一圈拍照存證',
+  '11/27、11/29 日落前 45 分鐘到定點',
+  '11/30 還車前加滿油並清空車上物品',
+  '12/1 清晨抵 MDW：留意登機門變動'
+ ]}
+];
+
+/* ---------- 工具 ---------- */
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+const money2 = n => '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- 倒數 ---------- */
+function tick(){
+  const diff = TRIP_START - new Date();
+  const note = $('#cd-note');
+  if(diff <= 0){
+    ['d','h','m','s'].forEach(k => $('#cd-'+k).textContent = '0');
+    note.textContent = new Date() < new Date('2026-12-01T10:40:00-05:00') ? '旅程進行中，玩得開心！' : '旅程結束，回家好好休息～';
+    return;
+  }
+  const s = Math.floor(diff/1000);
+  $('#cd-d').textContent = Math.floor(s/86400);
+  $('#cd-h').textContent = String(Math.floor(s%86400/3600)).padStart(2,'0');
+  $('#cd-m').textContent = String(Math.floor(s%3600/60)).padStart(2,'0');
+  $('#cd-s').textContent = String(s%60).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- 每日行程 ---------- */
+const tabsEl = $('#tabs'), panel = $('#panel');
+let cur = 0;
+(function pickToday(){
+  const now = new Date();
+  DAYS.forEach((d,i)=>{ const [m,dd] = d.d.split('/').map(Number); if(now.getFullYear()===2026 && now.getMonth()+1===m && now.getDate()===dd) cur = i; });
+})();
+
+tabsEl.innerHTML = DAYS.map((d,i)=>
+  `<button class="tab" role="tab" id="tab${i}" data-i="${i}" data-city="${d.city}" aria-controls="panel"><small>週${d.w}</small><b>${d.d}</b></button>`
+).join('');
+
+function restart(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+function showDay(i, animate){
+  cur = i;
+  const d = DAYS[i];
+  tabsEl.querySelectorAll('.tab').forEach((b,j)=>{
+    b.setAttribute('aria-selected', j===i);
+    b.tabIndex = j===i ? 0 : -1;
+  });
+  panel.setAttribute('aria-labelledby', 'tab'+i);
+  panel.innerHTML = `
+    <div class="ph ${d.city}">
+      <svg viewBox="0 0 120 90" aria-hidden="true"><use href="#${CITY_ICON[d.city]}"/></svg>
+      <div><h3>${esc(d.d)}（${d.w}）${esc(d.title)}</h3><p>${esc(d.sub)}</p></div>
+    </div>
+    <ol class="tl">${d.items.map(it=>`
+      <li class="${it.must?'must':''}">
+        <span class="t">${esc(it.t)}</span>
+        <div class="body">
+          <h4>${esc(it.h)} ${it.tags.map(t=>`<span class="tag ${t}">${TAG[t]}</span>`).join('')}${it.must?'<span class="must-b">必去</span>':''}</h4>
+          <p>${esc(it.p)}</p>
+        </div>
+      </li>`).join('')}
+    </ol>`;
+  if(animate){
+    restart(panel,'pop');
+    restart(tabsEl.children[i],'bounce');
+  }
+}
+tabsEl.addEventListener('click', e=>{
+  const b = e.target.closest('.tab'); if(!b) return;
+  showDay(+b.dataset.i, true);
+});
+tabsEl.addEventListener('keydown', e=>{
+  if(e.key!=='ArrowRight' && e.key!=='ArrowLeft') return;
+  const n = (cur + (e.key==='ArrowRight'?1:-1) + DAYS.length) % DAYS.length;
+  showDay(n, true); tabsEl.children[n].focus();
+});
+showDay(cur, false);
+setTimeout(()=>{ const t = tabsEl.children[cur]; if(t && cur>0) tabsEl.scrollLeft = t.offsetLeft - 16; }, 0);
+
+/* ---------- 預算 ---------- */
+let amts = store.get('wc26-amts', {});
+let people = store.get('wc26-people', 4);
+$('#people').value = people;
+
+function renderRows(){
+  $('#rows').innerHTML = BUDGET.map(b=>`
+    <div class="row">
+      <div class="nm"><b><span class="st ${b.st}">${ST[b.st]}</span>${esc(b.name)}</b><small>${esc(b.note)}${b.shared?'':'　· 只算你一個人'}</small></div>
+      <label><span style="position:absolute;left:-9999px">${esc(b.name)}總額</span><input type="number" min="0" step="0.01" inputmode="decimal" data-id="${b.id}" value="${amts[b.id] ?? b.amt}"></label>
+      <div class="pp"><small>每人</small><span data-pp="${b.id}">—</span></div>
+    </div>`).join('');
+}
+function calc(){
+  const per = {}; let me = 0, all = 0, fix = 0;
+  const catSum = {trans:0, stay:0, food:0, fun:0};
+  BUDGET.forEach(b=>{
+    const a = Math.max(0, parseFloat(amts[b.id] ?? b.amt) || 0);
+    const p = b.shared ? a/people : a;
+    per[b.id] = p; me += p; all += a;
+    catSum[b.cat] += p;
+    if(b.st!=='est') fix += p;
+    const el = document.querySelector(`[data-pp="${b.id}"]`);
+    if(el) el.textContent = money2(p);
+  });
+  $('#s-me').textContent = money(me);
+  $('#s-fix').textContent = money(fix);
+  $('#s-all').textContent = money(all);
+  $('#s-n').textContent = people;
+  $('#bar').innerHTML = Object.keys(CATS).map(k=>`<i style="width:${me?catSum[k]/me*100:0}%;background:${CATS[k][1]}"></i>`).join('');
+  $('#bl').innerHTML = Object.keys(CATS).map(k=>`<span style="--c:${CATS[k][1]}">${CATS[k][0]} ${money(catSum[k])}（${me?Math.round(catSum[k]/me*100):0}%）</span>`).join('');
+  const fmt = id => { const b = BUDGET.find(x=>x.id===id); return money(parseFloat(amts[id] ?? b.amt)||0) + '（每人 ' + money(per[id]) + '）'; };
+  $('#st-lv').textContent = fmt('h-lv'); $('#st-la').textContent = fmt('h-la'); $('#st-sd').textContent = fmt('h-sd');
+}
+$('#rows').addEventListener('input', e=>{
+  const id = e.target.dataset.id; if(!id) return;
+  amts[id] = e.target.value; store.set('wc26-amts', amts); calc();
+});
+$('#people').addEventListener('input', e=>{
+  const v = Math.max(1, Math.min(12, parseInt(e.target.value,10) || 1));
+  people = v; store.set('wc26-people', v); calc();
+});
+$('#reset').addEventListener('click', ()=>{
+  amts = {}; people = 4; $('#people').value = 4;
+  store.set('wc26-amts', amts); store.set('wc26-people', 4);
+  renderRows(); calc();
+});
+renderRows(); calc();
+
+/* ---------- 待辦 ---------- */
+let done = store.get('wc26-todo', {});
+const total = TODO.reduce((n,g)=>n+g.items.length,0);
+$('#cl').innerHTML = TODO.map((g,gi)=>`
+  <div class="card" style="--c:${g.c}">
+    <h3>${esc(g.g)}</h3>
+    <ul>${g.items.map((t,ti)=>{ const k = gi+'-'+ti; return `
+      <li><label><input type="checkbox" data-k="${k}" ${done[k]?'checked':''}><span class="bx"><svg viewBox="0 0 16 16" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span><span class="tx">${esc(t)}</span></label></li>`; }).join('')}
+    </ul>
+  </div>`).join('');
+function prog(){
+  const n = Object.values(done).filter(Boolean).length;
+  $('#prog-t').textContent = n + ' / ' + total;
+  $('#prog-b').style.width = (n/total*100) + '%';
+}
+$('#cl').addEventListener('change', e=>{
+  const k = e.target.dataset.k; if(!k) return;
+  done[k] = e.target.checked; store.set('wc26-todo', done); prog();
+});
+prog();
+
+/* ---------- 住宿備忘 ---------- */
+const notes = store.get('wc26-notes', {});
+document.querySelectorAll('textarea[data-note]').forEach(t=>{
+  t.value = notes[t.dataset.note] || '';
+  t.addEventListener('input', ()=>{ notes[t.dataset.note] = t.value; store.set('wc26-notes', notes); });
+});
+</script>
+</body>
+</html>
